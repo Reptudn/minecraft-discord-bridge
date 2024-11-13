@@ -1,0 +1,9 @@
+name: Minecraft-Discord-Bridge
+version: '1.0-SNAPSHOT'
+main: dev.reptudn.minecraftDiscordBridge.Main
+api-version: '1.21'
+prefix: MCDCBridge
+load: STARTUP
+authors: [ reptudn ]
+description: A Plugin that also runs a discord bot to link discord and minecraft
+website: https://github.com/Reptudn/minecraft-discord-bridge
