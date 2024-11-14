@@ -18,7 +18,6 @@ public class MessageListener implements Listener {
 
 		event.setFormat(ChatColor.BLUE + name + ChatColor.RESET + ": " + ChatColor.GRAY + message);
 
-		// TODO: Send message to Discord
 		DiscordCore.sendChatMessageEmbed(message, name);
 
 	}
