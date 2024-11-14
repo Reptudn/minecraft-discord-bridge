@@ -1,27 +1,26 @@
-package dev.reptudn.minecraftDiscordBridge.Discord.Listener;
+package dev.reptudn.minecraftDiscordBridge.Plugin.Listener;
 
 import dev.reptudn.minecraftDiscordBridge.Discord.DiscordCore;
-import dev.reptudn.minecraftDiscordBridge.Utils.Logger;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChatEvent;
 
-public class MessageListener extends ListenerAdapter {
+import java.awt.*;
 
-	@Override
-	public void onMessageReceived(MessageReceivedEvent event) {
+public class MessageListener implements Listener {
 
-		if (event.getAuthor().isBot()) return;
+	@EventHandler
+	public void onPlayerChat(PlayerChatEvent event) {
 
-		String message = event.getMessage().getContentRaw();
-		String author = event.getAuthor().getName();
+		String name = event.getPlayer().getName();
+		String message = event.getMessage();
 
-		DiscordCore.plugin.getServer().broadcastMessage(
-				ChatColor.BLUE + "[DISCORD] " + ChatColor.RESET +
-				ChatColor.BOLD + author + ChatColor.RESET + ": " + message
-		);
-		Logger.Log("Message from " + author + ": " + message);
+		event.setFormat(ChatColor.BLUE + name + ChatColor.RESET + ": " + ChatColor.GRAY + message);
+
+		// TODO: Send message to Discord
+		DiscordCore.sendChatMessageEmbed(message, name);
 
 	}
-}
 
+}
