@@ -9,3 +9,4 @@ public class MessageUtils extends JavaPlugin {
 	}
 
 }
+

@@ -13,7 +13,6 @@ public final class Main extends JavaPlugin {
 	public void onEnable() {
 
 		discordBot = new DiscordCore(this);
-
 		registerCommands();
 
 	}

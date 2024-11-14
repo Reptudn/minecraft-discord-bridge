@@ -20,6 +20,8 @@ public class MessageListener implements Listener {
 
 		// TODO: Send message to Discord
 		DiscordCore.sendChatMessageEmbed(message, name);
+
 	}
 
 }
+
