@@ -2,6 +2,7 @@ package dev.reptudn.minecraftDiscordBridge;
 
 import dev.reptudn.minecraftDiscordBridge.Discord.DiscordCore;
 import dev.reptudn.minecraftDiscordBridge.Plugin.Listener.JoinLeaveListener;
+import dev.reptudn.minecraftDiscordBridge.Plugin.Listener.MessageListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -24,6 +25,7 @@ public final class Main extends JavaPlugin {
 
 	private void registerCommands() {
 		getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
+		getServer().getPluginManager().registerEvents(new MessageListener(), this);
 	}
 
 }

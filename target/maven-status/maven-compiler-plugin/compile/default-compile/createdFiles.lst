@@ -1,7 +1,7 @@
-dev\reptudn\minecraftDiscordBridge\Plugin\MessageUtils.class
-dev\reptudn\minecraftDiscordBridge\Discord\DiscordCore.class
-dev\reptudn\minecraftDiscordBridge\Discord\Listener\MessageListener.class
-dev\reptudn\minecraftDiscordBridge\Main.class
-dev\reptudn\minecraftDiscordBridge\Plugin\Listener\MessageListener.class
-dev\reptudn\minecraftDiscordBridge\Plugin\Listener\JoinLeaveListener.class
-dev\reptudn\minecraftDiscordBridge\Utils\Logger.class
+dev/reptudn/minecraftDiscordBridge/Plugin/MessageUtils.class
+dev/reptudn/minecraftDiscordBridge/Utils/Logger.class
+dev/reptudn/minecraftDiscordBridge/Discord/Listener/MessageListener.class
+dev/reptudn/minecraftDiscordBridge/Plugin/Listener/JoinLeaveListener.class
+dev/reptudn/minecraftDiscordBridge/Discord/DiscordCore.class
+dev/reptudn/minecraftDiscordBridge/Main.class
+dev/reptudn/minecraftDiscordBridge/Plugin/Listener/MessageListener.class

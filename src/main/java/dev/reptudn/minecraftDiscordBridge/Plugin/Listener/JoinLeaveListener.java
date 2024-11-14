@@ -20,10 +20,8 @@ public class JoinLeaveListener implements Listener {
 		}
 
 		if (event.getPlayer().getUniqueId() == event.getPlayer().getServer().getOfflinePlayer("Reptudn").getUniqueId()) {
-			event.setJoinMessage(ChatColor.GREEN + ">> " +
-					ChatColor.MAGIC + ChatColor.GOLD + "#!#" + ChatColor.RESET +
+			event.setJoinMessage(ChatColor.GREEN + ">> " +  ChatColor.RESET +
 					ChatColor.YELLOW + ChatColor.UNDERLINE + ChatColor.BOLD + name + ChatColor.RESET +
-					ChatColor.MAGIC + ChatColor.GOLD + "<3!" + ChatColor.RESET +
 					ChatColor.GRAY + " has joined the server!");
 		} else
 			event.setJoinMessage(ChatColor.GREEN + ">> " + ChatColor.GRAY + name);

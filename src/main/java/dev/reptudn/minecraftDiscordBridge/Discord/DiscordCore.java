@@ -1,6 +1,7 @@
 package dev.reptudn.minecraftDiscordBridge.Discord;
 
 import dev.reptudn.minecraftDiscordBridge.Discord.Listener.MessageListener;
+import dev.reptudn.minecraftDiscordBridge.Utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -22,25 +23,29 @@ public class DiscordCore {
 		DiscordCore.plugin = plugin;
 
 		try {
-			jda = JDABuilder.createLight(DISCORD_BOT_TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
-					.addEventListeners(this)
+			Logger.Log("Starting discord bot");
+			jda = JDABuilder.createDefault(DISCORD_BOT_TOKEN)
+					.enableIntents(GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
+					.addEventListeners(new MessageListener())
 					.build();
-			jda.addEventListener(new MessageListener());
 		} catch (Exception e) {
 			e.printStackTrace();
+			Logger.Log("Failed to start discord bot");
+			return;
 		}
 
-		changeStatus("Server is online");
+		Logger.Log("Discord Bot started");
+		changeStatus("Server");
 
 	}
 
 	public static void sendChatMessageEmbed(String message, String author) {
 		EmbedBuilder embed = new EmbedBuilder();
 
-		embed.setAuthor(author);
+		embed.setTitle(author);
 		embed.setDescription(message);
 		embed.setColor(Color.BLUE);
-		embed.setThumbnail("https://mc-heads.net/avatar/" + author + "/64");
+		embed.setThumbnail("https://mc-heads.net/avatar/" + author + "/20.jpg");
 
 		Objects.requireNonNull(jda.getTextChannelById("1306353692785774653")).sendMessageEmbeds(embed.build()).queue();
 	}
@@ -48,9 +53,9 @@ public class DiscordCore {
 	public static void sendPlayerJoinEmbed(String name) {
 		EmbedBuilder embed = new EmbedBuilder();
 
-		embed.setAuthor(name + " has joined the server!");
+		embed.setTitle(name + " has joined the server!");
 		embed.setColor(Color.GREEN);
-		embed.setThumbnail("https://mc-heads.net/avatar/" + name + "/64");
+		embed.setThumbnail("https://mc-heads.net/avatar/" + name + "/20.jpg");
 
 		Objects.requireNonNull(jda.getTextChannelById("1306353692785774653")).sendMessageEmbeds(embed.build()).queue();
 
@@ -61,23 +66,30 @@ public class DiscordCore {
 	public static void sendPlayerLeaveEmbed(String name) {
 		EmbedBuilder embed = new EmbedBuilder();
 
-		embed.setAuthor(name + " has left the server!");
+		embed.setTitle(name + " has left the server!");
 		embed.setColor(Color.RED);
-		embed.setThumbnail("https://mc-heads.net/avatar/" + name + "/64");
+		embed.setThumbnail("https://mc-heads.net/avatar/" + name + "/20.jpg");
 
 		Objects.requireNonNull(jda.getTextChannelById("1306353692785774653")).sendMessageEmbeds(embed.build()).queue();
 
 		int playerCount = plugin.getServer().getOnlinePlayers().size();
-		jda.getPresence().setActivity(Activity.watching("Server with " + playerCount + " players"));
+		if (playerCount > 0)
+			jda.getPresence().setActivity(Activity.watching("Server with " + playerCount + " players"));
+		else
+			jda.getPresence().setActivity(Activity.watching("Server"));
 	}
 
 	public void changeStatus(String status) {
-		jda.getPresence().setActivity(Activity.watching(status));
+		if (jda != null)
+			jda.getPresence().setActivity(Activity.watching(status));
+		else Logger.Log("JDA IS NULL");
 	}
 
 	public void shutdown() {
 		changeStatus("Server is offline");
-		jda.shutdown();
+		if (jda != null)
+			jda.shutdownNow(); // TODO: fix weird exception when shutting down
+
 	}
 
 }
