@@ -30,7 +30,7 @@ public class DiscordCore {
 					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Logger.Log("Failed to start discord bot");
+			Logger.Log("Failed to start discord bot!");
 			return;
 		}
 
